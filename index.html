@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="400"
+        style="background-color: white">
+</canvas>
+
+
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var radius = canvas.height / 2;
+    ctx.translate(radius, radius);
+    radius = radius * 0.90
+    var number = 0;
+
+    // shim layer with setTimeout fallback
+    window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                    window.setTimeout(callback, 1000 / 60);
+                };
+    })();
+
+    //    (function drawClock() {
+    //        drawFace(ctx, radius);
+    //        drawNumbers(ctx, radius);
+    //        drawTime(ctx, radius);
+    //        requestAnimFrame(drawClock);
+    //        render();
+    //    })();
+
+    var fps = 1;
+    (function draw() {
+        setTimeout(function() {
+            requestAnimationFrame(draw);
+            document.write(number)
+            number++;
+        }, 1000 / fps);
+    })();
+
+</script>
+</body>
+</html>
